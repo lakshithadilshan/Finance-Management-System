@@ -1,0 +1,76 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+        /* Reset default margins */
+        body, h1, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f8ff; /* Light blue background */
+            color: #333;
+            padding: 20px;
+        }
+
+        /* Container to center the content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            text-align: center;
+            background-color: #ffffff; /* White background for the content */
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header Styling */
+        h1 {
+            font-size: 36px;
+            color: #1e3a8a; /* Dark blue */
+            margin-bottom: 20px;
+        }
+
+        /* Subheading Styling */
+        p {
+            font-size: 18px;
+            color: #4b5563; /* Slightly darker gray text */
+            margin-bottom: 30px;
+        }
+
+        /* Button Styling */
+        .btn {
+            background-color: #1e3a8a; /* Dark blue */
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin: 10px; /* Add some space between buttons */
+        }
+
+        .btn:hover {
+            background-color: #2563eb; /* Lighter blue on hover */
+        }
+
+        /* Footer Styling */
+        footer {
+            margin-top: 50px;
+            font-size: 14px;
+            color: #4b5563;
+            text-align: center;
+        }
+        body {
+                background-image: url('/FMS/resources/images/bg.jpg');
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-size: cover; /* Ensures the image covers the entire background */
+                background-position: center; /* Centers the image */
+                background-repeat: no-repeat; /* Prevents tiling */
+                background-attachment: fixed; /* Keeps the image fixed during scrolling */
+                min-height: 100vh;
+        }
+

@@ -1,0 +1,102 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+/* Reset default margins */
+body, h1, p, form {
+    margin: 0;
+    padding: 0;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f8ff; /* Light blue background */
+    color: #333;
+    padding: 20px;
+
+}
+
+/* Container Styling */
+.account-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff; /* White background */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column; /* Vertical stacking */
+    gap: 20px; /* Space between blocks */
+}
+
+/* Individual Blocks */
+.form-block {
+    padding: 20px;
+    background-color: #f9fafb; /* Light gray background */
+    border: 1px solid #e5e7eb; /* Border color */
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Headings */
+h3 {
+    font-size: 22px;
+    color: #1e3a8a;
+    margin-bottom: 15px;
+}
+
+/* Inputs and Buttons */
+label {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #4b5563;
+    display: block;
+}
+
+input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #1e3a8a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2563eb; /* Lighter blue on hover */
+}
+
+/* Menu and Logout Buttons */
+.menu-buttons {
+    display: flex;
+    flex-direction: column; /* Vertical alignment */
+    gap: 10px; /* Space between buttons */
+}
+
+.logout-button {
+    background-color: #f44336;
+    color: white;
+    padding: 12px;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.logout-button:hover {
+    background-color: #e53935;
+}

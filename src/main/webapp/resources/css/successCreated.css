@@ -1,0 +1,64 @@
+  <style>
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        .container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            width: 50%;
+            margin: 0 auto;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .container h2 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        .success-message {
+            font-size: 18px;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+        .error-message {
+                    font-size: 18px;
+                    color: #FF9800;
+                    margin-bottom: 20px;
+                }
+        .account-details {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .logout-button {
+                    background-color: #f44336;
+                    color: white;
+                    padding: 10px 20px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;
+                    border: none;
+                    cursor: pointer;
+                    border-radius: 5px;
+                    margin-top: 20px;
+                }
+
+                .logout-button:hover {
+                    background-color: #e53935; /* Darker red on hover */
+                }
+    </style>

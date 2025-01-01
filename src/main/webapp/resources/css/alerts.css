@@ -1,0 +1,51 @@
+/* Alert container positioning */
+#alert-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Base alert styling */
+.alert {
+    padding: 15px 20px;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateX(100%);
+    animation: slide-in 0.5s forwards;
+}
+
+/* Alert types */
+.alert.success {
+    background-color:#155724; /* Dark blue (aligned with your design) */
+}
+
+.alert.error {
+    background-color: #e63946; /* Red for error */
+}
+
+/* Show and hide animations */
+@keyframes slide-in {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-out {
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+.alert.hide {
+    animation: slide-out 0.5s forwards;
+}
