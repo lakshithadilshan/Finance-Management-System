@@ -48,6 +48,7 @@ public class UserServlet extends HttpServlet {
                 e.printStackTrace();
             }
                 try{
+                    //String EncryptedPassword = UserService.PasswordEncryption(password);
                     User user = new User(username,email,password);
                     boolean isRegistered = userDao.userRegister(user);
                     if (isRegistered) {
@@ -55,12 +56,12 @@ public class UserServlet extends HttpServlet {
                         logger.info("Successfully Created!");
                         req.setAttribute("successMessage", "Successfully Created!");
                         req.getRequestDispatcher("/systemuser/register.jsp").forward(req, resp);
-                        return;
+
                     } else {
-                        logger.warn("Fail Registraion");
-                        req.setAttribute("errorMessage", "Fail Registraion! Try again");
-                        req.getRequestDispatcher("user/register.jsp").forward(req, resp);
-                        return;
+                        logger.warn("Fail Registration");
+                        req.setAttribute("errorMessage", "Fail Registration! Try again");
+                        req.getRequestDispatcher("systemuser/register.jsp").forward(req, resp);
+
                     }
                 }catch (Exception e){
                     logger.warn("Error during registration.");

@@ -30,8 +30,23 @@ public class FixedDepositAccount {
             if (fdAccount != null) {
                 String createdDate = String.valueOf(fdAccount.getCreateddate());
                 LocalDate date = LocalDate.parse(createdDate);
-                // Add 3 months
-                LocalDate newDate = date.plusMonths(3);
+                LocalDate newDate = null;
+                // add months for make maturity date
+                switch (fdAccount.getTimeduration()){
+                    case 1:
+                         newDate = date.plusMonths(1);
+                        break;
+                    case 3:
+                         newDate = date.plusMonths(3);
+                        break;
+                    case 12:
+                         newDate = date.plusMonths(12);
+                        break;
+                    case 24:
+                         newDate = date.plusMonths(24);
+                        break;
+                }
+
                 // Format the new date back to a string if needed
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 formattedDate = newDate.format(formatter);

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Creation - Finance Management System</title>
+    <title>Open Account - Finance Management System</title>
 
     <script src="/FMS/resources/js/accCreation.js" defer></script>
     <link rel="stylesheet" type="text/css" href="/FMS/resources/css/accountCreation.css">
@@ -17,7 +17,7 @@
 <body>
 
 <div class="account-container">
-    <h2>Create Your Account</h2>
+    <h2>Open Your Account</h2>
 
     <!-- Account creation form -->
     <form action="<%= request.getContextPath() %>/account" method="post">
@@ -49,12 +49,12 @@
                     </select>
            </div>
 
-        <label for="initialdeposit">Initial Deposit (LKR):</label>
+        <label for="initialdeposit">Amount (LKR):</label>
         <input type="number" id="initialdeposit" name="initialDeposit" placeholder="2000" required>
 
         <input type="hidden" name="operation" value="accountcreation">
 
-        <button type="submit">Create Account <i class="fa-solid fa-circle-plus"></i>
+        <button type="submit">Open Account <i class="fa-solid fa-circle-plus"></i>
         </button>
     </form>
 

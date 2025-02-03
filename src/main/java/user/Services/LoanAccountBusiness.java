@@ -80,8 +80,9 @@ public class LoanAccountBusiness {
                     monthlyAmount = fullLoanAmount/36;
                     break;
             }
-            if (balance != fullLoanAmount){
-                monthlyFeeAndInterest = monthlyInterest + monthlyAmount;
+            if (balance > 0){
+                    monthlyFeeAndInterest = monthlyInterest + monthlyAmount;
+                    //check the repayment is more than balance and etc.
                 if (rePayAmount >= monthlyFeeAndInterest || balance == rePayAmount && !(balance > rePayAmount)){
                     if (payedAmount != fullLoanAmount + fullInterest){
                         payedAmount = payedAmount + rePayAmount ;
@@ -117,10 +118,12 @@ public class LoanAccountBusiness {
                     logger.info("Not enough money for this month payment OR if  you pay last payment or remain full payment pay only remain balance..");
                 }
             }else {
-                logger.info("loan Already payed anc closed account");
+                responseDTO.setResponseMsg("Loan Already payed and closed account");
+                logger.info("loan Already payed and closed account");
             }
         }catch (Exception e){
             e.printStackTrace();
+            logger.error("error while during repayment");
         }
         return responseDTO;
     }

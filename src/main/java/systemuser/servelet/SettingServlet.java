@@ -34,19 +34,17 @@ public class SettingServlet extends HttpServlet {
             if (!transactionTypes.isEmpty()  || !rates.isEmpty()){
                 req.setAttribute("transactionTypes", transactionTypes);
                 req.setAttribute("rates", rates);
-                // Forward to the JSP
-                req.getRequestDispatcher("/systemuser/setting.jsp").forward(req, resp);
             }else {
                 logger.warn("No data Found Transaction Type or Rates...");
                 req.setAttribute("errorMessage", "Error loading data.");
-                req.getRequestDispatcher("/systemuser/setting.jsp").forward(req, resp);
             }
+            // Forward to the JSP
+            req.getRequestDispatcher("/systemuser/setting.jsp").forward(req, resp);
+
 
         } catch (Exception e) {
             logger.error("Error loading data");
             e.printStackTrace();
-            req.setAttribute("errorMessage", "Error loading data.");
-            req.getRequestDispatcher("/WEB-INF/error.jsp").forward(req, resp);
         }
     }
 
@@ -64,11 +62,11 @@ public class SettingServlet extends HttpServlet {
                         //make a response msg
                         String  updateMsg = "";
                         if (updateStatus.equals("0")){
-                            logger.info("Sucessfully Enabled!");
-                            req.setAttribute("updateRMsg", "Sucessfully Enabled!");
+                            logger.info("Successfully Enabled!");
+                            req.setAttribute("updateRMsg", "Successfully Enabled!");
                         }else {
-                            logger.info("Sucessfully Disabled!");
-                            req.setAttribute("updateRMsg", "Sucessfully Disabled!");
+                            logger.info("Successfully Disabled!");
+                            req.setAttribute("updateRMsg", "Successfully Disabled!");
                         }
                         // call doGet method
                         doGet(req, resp);
@@ -78,8 +76,8 @@ public class SettingServlet extends HttpServlet {
                         doGet(req, resp);
                     }
                 }else {
-                    logger.warn("Does not exist Trnsaction type");
-                    req.setAttribute("errorMessage", "Does not exist Trnsaction type");
+                    logger.warn("Does not exist Transaction type");
+                    req.setAttribute("errorMessage", "Does not exist Transaction type");
                     doGet(req, resp);
                 }
             }catch (Exception e){

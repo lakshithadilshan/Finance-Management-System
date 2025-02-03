@@ -50,14 +50,14 @@ public class SavingAccountServlet extends HttpServlet {
         if (operation.equals("withdraw") || operation.equals("deposit")){
             Amount = Integer.valueOf(req.getParameter("amount"));
         }
-        if (accountNumber == null || accountNumber.isEmpty() || operation == null || operation.isEmpty() ) {
-            errorMSG = "Account number is required.";
+        if (accountNumber.length() != 8 || accountNumber == null || accountNumber.isEmpty() || operation == null || operation.isEmpty() ) {
+            errorMSG = "Account number is Empty or Incorrect.";
             status = VarList.STATUS_FALSE;
-            return;
+            logger.warn("account number empty ,null or not completed 8 numbers");
         } else if ((operation.equals("withdraw") || operation.equals("deposit")) && (Amount < 0)) {
             errorMSG = "Amount should be more than 0";
             status = VarList.STATUS_FALSE;
-            return;
+            logger.warn("Amount should be more than 0");
         }
         if (status) {
             switch (operation) {
@@ -103,7 +103,7 @@ public class SavingAccountServlet extends HttpServlet {
                         if (checkAccExist) {
                             float balance = account.checkBalance(VarList.SAVING_ACC, accountNumber, accountOwner);
                             req.setAttribute("balance", balance);
-                            logger.warn("Check balance");
+                            logger.info("Check balance");
                         } else {
                             logger.warn("Does not exist Account");
                             req.setAttribute("errorMessage", "Does not exist Account");

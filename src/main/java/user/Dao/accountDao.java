@@ -324,9 +324,9 @@ public class accountDao {
         return time;
     }
 
-    public boolean createLoanAccount(Integer newAccNum, String UserId, float initialDeposit, Integer rate, int accountOwner, float fullinterest, float loanAndInterest, String timeDuration) {
+    public boolean createLoanAccount(Integer newAccNum, String UserId, float initialDeposit, Integer rate, int accountOwner, float fullinterest, float loanAndInterest, String timeDuration,int timeDurationMonth) {
 
-        String sql = "INSERT INTO loan_account (account_number, account_owner,rate,balance,  full_loan_amount, createdby, created_date, full_interest,time_duration) VALUES (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO loan_account (account_number, account_owner,rate,balance,  full_loan_amount, createdby, created_date, full_interest,time_duration,timeDurationMonth) VALUES (?,?,?,?,?,?,?,?,?,?)";
         try (Connection connection = DatabaseUtil.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             LocalDate today = LocalDate.now(); // Current date
@@ -341,6 +341,7 @@ public class accountDao {
             preparedStatement.setDate(7, sqlDate);
             preparedStatement.setString(8, String.valueOf(fullinterest));
             preparedStatement.setString(9, timeDuration);
+            preparedStatement.setInt(10, timeDurationMonth);
             return preparedStatement.executeUpdate() > 0; // Returns true if registration is successful
 
         } catch (Exception e) {
@@ -369,10 +370,11 @@ public class accountDao {
 
 
                 } else {
-                    System.out.println("No data found for account number: " + accNum);
+                    logger.info("No data found for account number");
+                    //System.out.println("No data found for account number: " + accNum);
                 }
             }
-            System.out.println("Executing query: " + sql + " with account number: " + accNum);
+//            System.out.println("Executing query: " + sql + " with account number: " + accNum);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -392,10 +394,10 @@ public class accountDao {
             int rowsUpdated = preparedStatement.executeUpdate();
 
             if (rowsUpdated > 0) {
-                System.out.println("Repay done");
+                logger.info("Repay done");
                 status = VarList.STATUS_TRUE;
             } else {
-                System.out.println("Repay fail");
+                logger.warn("Repay fail");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -491,5 +493,26 @@ public class accountDao {
         }
         return loanBalanceDTO;
 
+    }
+
+    public Integer generateNewAccNumber(String accounttype) {
+        Integer accNum = null;
+        try (Connection connection = DatabaseUtil.getConnection();
+             CallableStatement callstmt = connection.prepareCall("{CALL GenerateAccNumber(?,?)}")) {
+                callstmt.setString(1, accounttype);
+                callstmt.registerOutParameter(2, Types.INTEGER);
+                callstmt.execute();
+                accNum = callstmt.getInt(2);
+                if (accNum != 0) {
+                    return accNum;
+                } else {
+                    logger.warn("Number Generation failed");
+                }
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("Error while generating account number");
+
+        }
+        return accNum;
     }
 }

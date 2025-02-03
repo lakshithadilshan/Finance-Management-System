@@ -11,7 +11,7 @@
 <body>
 
     <div class="menu-container">
-        <h2><i class="fa-solid fa-bars"></i> </i>Account Menu</h2>
+        <h2><i class="fa-solid fa-bars"></i> </i> Menu</h2>
 
 
          <form action="/FMS/user/clientUserRegister.jsp" method="post">
@@ -19,7 +19,7 @@
          </form>
         <!-- Account Creation Button -->
         <form action="/FMS/user/accountCreation.jsp" method="post">
-            <button type="submit"><i class='fas fa-plus-circle'></i>    Account Creation</button>
+            <button type="submit"><i class='fas fa-plus-circle'></i>    Open Account</button>
         </form>
 
         <form action="/FMS/user/loanAccount.jsp" method="post">
@@ -32,6 +32,10 @@
 
         <form action="/FMS/user/savingAccount.jsp" method="post">
             <button type="submit"><i class='fas fa-wallet'></i>     Saving Account</button>
+        </form>
+
+        <form action="" method="post">
+           <button type="submit"><i class=''></i> Passbook</button>
         </form>
 
         <!-- Logout Button -->

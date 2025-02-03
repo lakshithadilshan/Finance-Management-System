@@ -28,7 +28,7 @@ public class VarList {
     //tax
     public static final float FD_ACC_TAX = 10;
 
-    //responsecode
+    //response code
     public static final String RESPONSE_CODE_SUCESS = "00";
     public static final String RESPONSE_CODE_FALSE = "01";
 

@@ -19,7 +19,7 @@
         <h3>Search FD Account Details</h3>
         <form action="<%= request.getContextPath() %>/fdAccount" method="post">
             <label for="accnnum">Account Number:</label>
-            <input type="text" id="accnnum" name="accNum" placeholder="2001" required>
+            <input type="text" id="accnnum" name="accNum" placeholder="Enter account number ex:67761873" required>
 
             <p><strong>Maturity Date: </strong><%= request.getAttribute("mDate") != null ? request.getAttribute("mDate") : "No maturity date available" %></p>
             <p><strong>Interest Earned: LKR </strong><%= request.getAttribute("interestEarned") != null ? request.getAttribute("interestEarned") : "No interest data available" %></p>
@@ -35,7 +35,7 @@
         <h3>Withdraw Funds</h3>
         <form action="<%= request.getContextPath() %>/fdAccount" method="post">
             <label for="withdrawAccNum">Account Number:</label>
-            <input type="number" id="withdrawAccNum" name="accNum" placeholder="2001" required>
+            <input type="number" id="withdrawAccNum" name="accNum" placeholder="Enter account number ex:67761873" required>
 
             <p><strong> </strong><%= request.getAttribute("successMsgFD") != null ? request.getAttribute("successMsgFD") : "Welcome" %></p>
             <input type="hidden" id="withdrawAmount" name="withdrawAmount" placeholder="Enter amount" required>

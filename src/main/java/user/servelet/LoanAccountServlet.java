@@ -44,61 +44,65 @@ public class LoanAccountServlet extends HttpServlet {
         String accNum = req.getParameter("accnumber");
         String operation = req.getParameter("operation");
         String repayAmount = req.getParameter("repaymentAmount");
-        if (accNum == null || accNum.isEmpty() && operation == null || operation.isEmpty() ) {
-            session.setAttribute("errorMessage", "Please enter Acc Number again");
-            resp.sendRedirect("/FMS/user/loanAccount.jsp");
-        }
-      //validation
-        try{
-            //check account exists or not
-            boolean checkAccExist = accDao.checkAccount(accNum,VarList.LOAN_ACC);
-            if (!checkAccExist){
-                req.setAttribute("errorMessage", VarList.ACC_NOT_AVAILABLE);
-                req.getRequestDispatcher("/user/loanAccount.jsp").forward(req, resp);
-                logger.warn(VarList.ACC_NOT_AVAILABLE);
-                return;
-            }
-            String sucessMsg = "";
-            switch (operation){
-                case "repay":
-                    if ( repayAmount == null || repayAmount.isEmpty()){
-                        sucessMsg = "Please Enter Amount";
-                        session.setAttribute("LoansucessMsg", sucessMsg);
-                        resp.sendRedirect("/FMS/user/loanAccount.jsp");
-                    }else {
-                        ResponseDTO status = loanAccountBusiness.RepayLoan(accNum, repayAmount, accountOwner);
-                        if (status.isStatus()) {
-                            req.setAttribute("successMsg", "Payment Successfully");
-                            logger.info("Payment Successfully");
+        //validation
+        if (accNum.length() != 8 ||accNum == null || accNum.isEmpty() && operation == null || operation.isEmpty() ) {
+            logger.warn("account number empty ,null or not completed 8 numbers");
+            req.setAttribute("errorMessage", "Account number is Empty or Incorrect.");
+            req.getRequestDispatcher("/user/loanAccount.jsp").forward(req, resp);
+        }else {
+            try {
+                //check account exists or not
+                boolean checkAccExist = accDao.checkAccount(accNum, VarList.LOAN_ACC);
+                if (!checkAccExist) {
+                    req.setAttribute("errorMessage", VarList.ACC_NOT_AVAILABLE);
+                    req.getRequestDispatcher("/user/loanAccount.jsp").forward(req, resp);
+                    logger.warn(VarList.ACC_NOT_AVAILABLE);
+                    return;
+                }
+                String sucessMsg = "";
+                switch (operation) {
+                    case "repay":
+                        float fRepayAmount = Float.parseFloat(repayAmount);
+                        if (fRepayAmount < 0 ||repayAmount == null || repayAmount.isEmpty()) {
+                            sucessMsg = "Amount must be grater than 0 and not be empty";
+                            session.setAttribute("LoansucessMsg", sucessMsg);
+                            resp.sendRedirect("/FMS/user/loanAccount.jsp");
+                            logger.info("Amount must be grater than 0 and not be empty");
                         } else {
-                            req.setAttribute("errorMessage", "Payment Unsuccessful! :"+ status.getResponseMsg());
-                            logger.warn("Payment Unsuccessful! ");
-                        }
-                        req.getRequestDispatcher("/user/loanAccount.jsp").forward(req, resp);
+                            ResponseDTO status = loanAccountBusiness.RepayLoan(accNum, repayAmount, accountOwner);
+                            if (status.isStatus()) {
+                                req.setAttribute("successMsg", "Payment Successfully");
+                                logger.info("Payment Successfully");
+                            } else {
+                                req.setAttribute("errorMessage", "Payment Unsuccessful! :" + status.getResponseMsg());
+                                logger.warn("Payment Unsuccessful! ");
+                            }
+                            req.getRequestDispatcher("/user/loanAccount.jsp").forward(req, resp);
 
-                    }
-                    break;
-                case "checkbalance":
-                    try{
-                        logger.info("Initiate Loan Acc Check Balance..");
-                        //return the balance and monthly charge
-                        ResponseDTO balMoncharge = loanAccountBusiness.checkBalanceandMonthlyCharge(accNum);
-                        if (balMoncharge.isStatus()){
-                            req.setAttribute("remainBalance", balMoncharge.getResponseMsg());
-                        }else {
-                            req.setAttribute("errorMessage", balMoncharge.getResponseMsg());
                         }
-                        req.getRequestDispatcher("/user/loanAccount.jsp").forward(req, resp);
-                    }catch (Exception e){
-                        e.printStackTrace();
-                        logger.error("error Loan Acc Check Balance..");
-                        req.setAttribute("errorMessage", "error Loan Acc Check Balance..");
-                        req.getRequestDispatcher("/user/loanAccount.jsp").forward(req, resp);
-                    }
-                    break;
+                        break;
+                    case "checkbalance":
+                        try {
+                            logger.info("Initiate Loan Acc Check Balance..");
+                            //return the balance and monthly charge
+                            ResponseDTO balMoncharge = loanAccountBusiness.checkBalanceandMonthlyCharge(accNum);
+                            if (balMoncharge.isStatus()) {
+                                req.setAttribute("remainBalance", balMoncharge.getResponseMsg());
+                            } else {
+                                req.setAttribute("errorMessage", balMoncharge.getResponseMsg());
+                            }
+                            req.getRequestDispatcher("/user/loanAccount.jsp").forward(req, resp);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            logger.error("error Loan Acc Check Balance..");
+                            req.setAttribute("errorMessage", "error Loan Acc Check Balance..");
+                            req.getRequestDispatcher("/user/loanAccount.jsp").forward(req, resp);
+                        }
+                        break;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        }catch (Exception e){
-            e.printStackTrace();
         }
     }
 }

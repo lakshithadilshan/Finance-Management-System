@@ -2,6 +2,8 @@ package systemuser.servelet;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
+import systemuser.util.LoginValidator;
+import user.DTO.ResponseDTO;
 import user.Dao.userDao;
 import user.model.User;
 
@@ -25,12 +27,18 @@ public class LoginServlet extends HttpServlet {
         String side = req.getParameter("side");
         logger.info("Iniitiate Login...");
 
-        if (username == null || username.isEmpty() || password == null || password.isEmpty() || side == null || side.isEmpty()){
-            // null check credentials
-            logger.warn("Required username and password");
-            req.setAttribute("errorMessage", "Required username and password");
-            req.getRequestDispatcher("systemuser/login.jsp").forward(req, resp);
-        }else {
+        ResponseDTO responseDTO = LoginValidator.validateLoginCredentials(username,password,side);
+        if (!responseDTO.isStatus()){
+            logger.warn("login credentials error "+responseDTO.getResponseMsg());
+            String direction = "";
+            if (side.equals("adminPanel")){
+                direction = "settingLogin.jsp";
+            }else{
+                direction = "login.jsp";
+            }
+            req.setAttribute("errorMessage", responseDTO.getResponseMsg());
+            req.getRequestDispatcher("systemuser/"+direction).forward(req, resp);
+        } else {
             try {
                 User user = userDao.getUserByUsername(username);
                 if (user != null){
@@ -39,7 +47,7 @@ public class LoginServlet extends HttpServlet {
                     switch (side) {
                         case "adminPanel":
                             if (userDao.getUserByUsername(username) != null && user.getPassword().equals(password)) {
-                                // Successful login: create session
+                                // Successful login admin Panel
                                 logger.info("Successfully login to admin Panel");
                                 session.setAttribute("side", "adminPanel");
                                 resp.sendRedirect("admin");
@@ -55,8 +63,8 @@ public class LoginServlet extends HttpServlet {
 
                             if (userDao.getUserByUsername(username) != null && user.getPassword().equals(password)) {
                                 logger.info("Successfully login to Customer Service Panel");
-                                // Successful login: create session
-                                resp.sendRedirect("/FMS/user/accountsMenu.jsp"); // Redirect to account create page
+                                // Successful login
+                                resp.sendRedirect("/FMS/user/accountsMenu.jsp"); // Redirect to account menu page
 
                             } else {
                                 // Invalid credentials

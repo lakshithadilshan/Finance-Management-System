@@ -56,8 +56,8 @@ public class RateServlet extends HttpServlet {
                     resp.sendRedirect("admin");
                 }
             }else {
-                logger.warn("Input Pramaters empty...");
-                session.setAttribute("errorMessage","Update failed:Input Pramaters empty");
+                logger.warn("Input Parameters empty...");
+                session.setAttribute("errorMessage","Update failed:Input Parameters empty");
                 resp.sendRedirect("admin");
             }
         }catch (Exception e){

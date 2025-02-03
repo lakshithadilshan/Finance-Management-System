@@ -20,13 +20,15 @@
     <form action="<%= request.getContextPath() %>/loan" method="post">
         <h3>Check Remaining Balance</h3>
         <label for="accnum">Loan Account Number:</label>
-        <input type="number" id="accnumber" name="accnumber" placeholder="Enter loan account number ex:3001" required>
+        <input type="number" id="accnumber" name="accnumber" placeholder="Enter account number ex:16045471" required>
         <input type="hidden" name="operation" value="checkbalance">
 
         <button type="submit" >Check Balance <i class="fa-solid fa-magnifying-glass-dollar"></i></button>
     </form>
 
          <p><strong>Remaining Balance: LKR </strong><%= request.getAttribute("remainBalance") != null ? request.getAttribute("remainBalance") : "No Remain data available" %></p>
+         <p><strong>Time Period: LKR </strong><%= request.getAttribute("timePeriod") != null ? request.getAttribute("timePeriod") : "No Time Period available" %></p>
+
 
 
     <hr>
@@ -35,7 +37,7 @@
     <form action="<%= request.getContextPath() %>/loan" method="post">
         <h3>Repay Loan</h3>
         <label for="accnum">Loan Account Number:</label>
-        <input type="number" id="accnumber" name="accnumber" placeholder="Enter loan account number ex:3001" required>
+        <input type="number" id="accnumber" name="accnumber" placeholder="Enter  account number ex:16045471" required>
         <label for="repaymentAmount">Repayment Amount (LKR):</label>
         <input type="number" id="repaymentAmount" name="repaymentAmount" placeholder="Enter amount to repay" min="0" step="0.01" required>
         <input type="hidden" name="operation" value="repay">

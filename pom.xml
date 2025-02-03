@@ -41,6 +41,7 @@
       <artifactId>jstl</artifactId>
       <version>1.2</version>
     </dependency>
+<!--    making logs-->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
@@ -51,13 +52,18 @@
       <artifactId>log4j-api</artifactId>
       <version>2.20.0</version>
     </dependency>
-
+<!--    use for coloured console-->
     <dependency>
       <groupId>org.fusesource.jansi</groupId>
       <artifactId>jansi</artifactId>
       <version>2.4.0</version>
     </dependency>
 
+    <dependency>
+      <groupId>de.mkammerer</groupId>
+      <artifactId>argon2-jvm</artifactId>
+      <version>2.11</version>
+    </dependency>
 
 
 

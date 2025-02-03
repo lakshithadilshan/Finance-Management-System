@@ -19,7 +19,7 @@
                 <h3>Balance Inquiry</h3>
                 <form action="<%= request.getContextPath() %>/savingacc" method="post">
                     <label for="accountNumber">Account Number:</label>
-                    <input type="number" id="accnumber" name="accountNumber" required>
+                    <input type="number" id="accnumber" name="accountNumber" placeholder="Enter account number ex:85290707" required>
                     <input type="hidden" id="accounttype" name="accounttype" value="saving_account" required>
                     <input type="hidden" id="operation" name="operation" value="checkBalance">
                     <button class="btn" type="submit">Check Balance</button>
@@ -34,7 +34,7 @@
                 <h3>Deposit/Withdraw Money</h3>
                 <form action="<%= request.getContextPath() %>/savingacc" method="post">
                     <label for="transactionAccountNumber">Account Number:</label>
-                    <input type="number" id="transactionAccountNumber" name="accountNumber" required>
+                    <input type="number" id="transactionAccountNumber" name="accountNumber" placeholder="Enter account number ex:85290707" required>
 
                     <label for="transactionType">Transaction Type:</label>
                     <select id="transactionType" name="operation" required>

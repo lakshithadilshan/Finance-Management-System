@@ -12,60 +12,7 @@
     <!--links for make Alert-->
         <link rel="stylesheet" type="text/css" href="/FMS/resources/css/alerts.css">
         <script src="/FMS/resources/js/alerts.js" defer></script>
-    <style>
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
-            padding-top: 60px;
-        }
 
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 50%;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* Styling for buttons */
-        .btn {
-            padding: 10px 15px;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .btn-update {
-            background-color: #4CAF50;
-        }
-        .btn-cancel {
-            background-color: #f44336;
-        }
-
-    </style>
 </head>
 <body>
     <div class="container">
@@ -228,6 +175,7 @@
             }
         };
     </script>
+
 
 
 </body>

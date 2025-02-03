@@ -18,7 +18,7 @@ public class userDao {
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setString(1, user.getUsername());
-            preparedStatement.setString(2, user.getPassword()); // Ideally, hash the password
+            preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getEmail());
 
             return preparedStatement.executeUpdate() > 0; // Returns true if registration is successful
@@ -28,7 +28,7 @@ public class userDao {
         }
     }
 
-    // Fetch a user by username (optional for login or validation)
+    // Fetch a user by username
     public User getUserByUsername(String username) {
         String sql = "SELECT user_id, username, password, email FROM user WHERE username = ?";
         User user = null;

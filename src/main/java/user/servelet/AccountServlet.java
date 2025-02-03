@@ -24,7 +24,7 @@ public class AccountServlet extends HttpServlet {
 //account creation process)
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //vaidation input param
+        //validation input param
         ResponseDTO responseDTO = inputValidatorAcc.validateParameters(req);
         if (responseDTO.isStatus()) {
             String nic = req.getParameter("nic");
@@ -68,8 +68,6 @@ public class AccountServlet extends HttpServlet {
                                 break;
                         }
                         if (!newAccNum.isEmpty() && newAccNum != null || newAccNum.length() >= 4) {
-                            logger.info("Generated new account Number");
-                            // Set the balance as a request attribute
                             if(!resp.isCommitted()) {
                                 req.setAttribute("newAccNum", newAccNum);
                                 // Forward the request to the JSP page
@@ -87,8 +85,7 @@ public class AccountServlet extends HttpServlet {
                         }
                     }
         }else {
-//            req.setAttribute("newAccNum", responseDTO.getResponseMsg());
-//            req.getRequestDispatcher("/user/successCreatedSavingAcc.jsp").forward(req, resp);
+
             req.setAttribute("errorMessage", responseDTO.getResponseMsg());
             req.getRequestDispatcher("/user/accountCreation.jsp").forward(req, resp);
             logger.warn("Invalid Input param:Redirect back");

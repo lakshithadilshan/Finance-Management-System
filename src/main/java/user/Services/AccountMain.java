@@ -50,9 +50,11 @@ public class AccountMain {
         logger.info("Initiate Loan account creation!");
         float fullInterest = loanAccountBusiness.makeInterestLoan(initialDeposit, loantime);
         float loanAndInterest = initialDeposit + fullInterest;
+        int loantimeInt = Integer.parseInt(loantime);
+        int timeDurationMonth = loantimeInt * 12;
         boolean checkReady = initAccountCreate(accountType, nic);
         if (checkReady) {
-            boolean isCreated = accountDao.createLoanAccount(newAccNum, UserId, initialDeposit, rate, accountOwner, fullInterest, loanAndInterest, loantime);
+            boolean isCreated = accountDao.createLoanAccount(newAccNum, UserId, initialDeposit, rate, accountOwner, fullInterest, loanAndInterest, loantime ,timeDurationMonth);
             if (isCreated) {
                 String StrnewAccNum = String.valueOf(newAccNum);
                 logger.info("Loan Acc created Success");
@@ -94,9 +96,11 @@ public class AccountMain {
             rateId = VarList.FD_ACC_RATE;
         }
         try {
-            //creating account number
-            latestAccNum = accountDao.getLatestAccNum(accounttype);
-            newAccNum = latestAccNum + 1;
+            //generate new acc number
+            newAccNum = accountDao.generateNewAccNumber(accounttype);
+            if (newAccNum == 0){
+                return status ;
+            }
             //check if exist that rate
             rate = accountDao.getRate(rateId);
             //get user id using nic number

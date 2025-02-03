@@ -43,7 +43,7 @@
         </form>
     </div>
 <script>
-        // Example of triggering success and error messages
+        // triggering success and error messages
         window.onload = function () {
             <% String successMessage = (String) request.getAttribute("successMessage"); %>
             <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
